@@ -69,7 +69,7 @@ export const experience: Job[] = [
         period: '2024.01 - 2024.03',
         stack: ['Python'],
         background: ['고객사 제안서를 위해 웹툰 플랫폼 사용자 리뷰를 경쟁 서비스와 비교'],
-        results: ['감성분석과 키워드 추출로 경쟁 서비스 대비 약점 영역을 정리해 제안 근거로 활용'],
+        results: ['리뷰를 긍정·부정과 주제별로 나눠 경쟁 서비스 대비 약점 영역을 정리하고 제안 근거로 활용'],
       },
       {
         name: '광고 성과 대시보드',
@@ -106,7 +106,7 @@ export const experience: Job[] = [
         caseStudy: 'image',
         stack: ['Python', 'Google Cloud Vision API'],
         background: ['마케터가 눈으로 하던 광고 이미지 분류를 자동화'],
-        results: ['Google Cloud Vision API로 텍스트·사물·색상을 추출하고, 유사도로 리사이징된 이미지를 자동 분류'],
+        results: ['Google Cloud Vision API로 텍스트·사물·색상을 추출해, 크기만 다른 같은 소재를 자동으로 묶음'],
       },
       {
         name: '마케터 일일 업무 자동화',
@@ -129,11 +129,11 @@ export const experience: Job[] = [
         name: '패션 이커머스 고객사 분석',
         period: '2022.03 - 2022.08',
         caseStudy: 'fashion',
-        stack: ['Python', 'Shapley Value', 'Logistic Regression', 'K-Means'],
+        stack: ['Python'],
         background: ['고객사의 매체 기여도와 신규 카테고리(골프·키즈 등) 구매 패턴 분석'],
         results: [
-          '앱 로그 데이터로 신규 카테고리 구매에 영향을 주는 변수와 구매 유저 군집 도출',
-          'Shapley value·Markov chain으로 유입 매체 기여도 분석',
+          '앱 로그 데이터로 신규 카테고리 구매에 영향을 주는 요인과 구매 유저 유형 도출',
+          '유입 매체별 전환 기여도 분석',
         ],
       },
       {
@@ -144,7 +144,7 @@ export const experience: Job[] = [
         background: ['광고주 리뷰를 수집·분석해 마케터의 광고주 탐색과 제안을 돕는 서비스'],
         results: [
           '자사몰·네이버 쇼핑·스마트스토어 리뷰를 수집해 AWS S3·Athena에 적재하는 파이프라인 설계',
-          '감성분석 리포트를 마케터에게 제공해 신규 광고주 수주에 기여',
+          '리뷰 분석 리포트를 마케터에게 제공해 신규 광고주 수주에 기여',
         ],
       },
     ],

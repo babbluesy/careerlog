@@ -71,19 +71,19 @@ export const caseStudies: CaseStudy[] = [
     company: '매드업',
     period: '2021.12 - 2022.12',
     summary:
-      '광고주의 자사몰·쇼핑몰 리뷰를 자동으로 수집·적재하고, 감성분석 리포트를 마케터에게 제공한 서비스입니다.',
+      '광고주의 자사몰·쇼핑몰 리뷰를 자동으로 수집·적재하고, 리뷰 분석 리포트를 마케터에게 제공한 서비스입니다.',
     collaborators: ['Data Scientist', 'Product Owner'],
     stack: ['Python', 'selenium', 'AWS S3', 'AWS Athena', 'NAVER CLOVA Sentiment', 'Jupyter'],
     blocks: [
       {
         heading: '수집·적재 파이프라인',
         bullets: [
-          '스프레드시트에 광고주를 등록하면 스케줄러가 수집·정제·감성분석을 실행',
+          '스프레드시트에 광고주를 등록하면 스케줄러가 수집·정제·분석을 실행',
           '결과를 AWS S3에 날짜별로 적재하고 Athena에서 쿼리로 조회',
         ],
       },
       {
-        heading: '감성분석',
+        heading: '리뷰 긍정·부정 분석',
         bullets: [
           '별점은 대체로 긍정 쪽으로 치우쳐 있어, 리뷰 본문의 긍정·부정 점수를 따로 산출',
           '리뷰 → 상품 → 구매처 단위로 집계해 부정 리뷰 비중을 비교',
@@ -103,20 +103,20 @@ export const caseStudies: CaseStudy[] = [
     summary:
       '패션 이커머스 고객사의 유입 매체 기여도와, 골프·키즈 같은 신규 카테고리를 사는 유저의 특성을 분석했습니다.',
     collaborators: ['Marketer', 'Data Scientist'],
-    stack: ['Python', 'Shapley Value', 'Markov Chain', 'Logistic Regression', 'Random Forest', 'K-Means'],
+    stack: ['Python'],
     blocks: [
       {
         heading: '매체 기여도',
         bullets: [
-          '앱 로그의 유입 경로로 Shapley value와 Markov chain 기여도를 계산',
-          '두 방법 모두 기여도가 광고비 규모를 따라가는 경향을 확인해, 예산을 반영한 분석이 필요하다는 결론',
+          '앱 로그의 유입 경로로 매체별 전환 기여도를 계산',
+          '기여도가 광고비 규모를 따라가는 경향을 확인해, 예산을 반영한 분석이 필요하다는 결론',
         ],
       },
       {
         heading: '신규 카테고리 구매 유저',
         bullets: [
-          '브랜드 카테고리·랜딩 유형·매체 변수를 만들어 Random Forest와 로지스틱 회귀로 주요 변수 도출',
-          'K-Means 군집분석으로 저가 상품을 여러 개 사는 유저군에서 신규 카테고리 구매가 많음을 확인',
+          '브랜드 카테고리·랜딩 유형·매체 변수를 만들어 신규 카테고리 구매에 영향을 주는 요인 도출',
+          '구매 행동이 비슷한 유저끼리 묶어 보니, 저가 상품을 여러 개 사는 유저군에서 신규 카테고리 구매가 많았음',
         ],
       },
     ],
@@ -129,17 +129,17 @@ export const caseStudies: CaseStudy[] = [
     summary:
       '광고 이미지에서 텍스트·사물·색상을 뽑아, 마케터가 눈으로 하던 리사이징 이미지 분류를 자동화했습니다. PO, 개발자와 함께 테스트 페이지까지 만들었습니다.',
     collaborators: ['Product Owner', 'Frontend Developer'],
-    stack: ['Python', 'Google Cloud Vision API', 'Image Hashing', 'Jaccard Similarity'],
+    stack: ['Python', 'Google Cloud Vision API'],
     blocks: [
       {
         heading: '속성 추출',
         bullets: ['Google Cloud Vision API로 이미지의 텍스트, 사물, 주 색상을 추출'],
       },
       {
-        heading: '유사도 판단',
+        heading: '같은 소재 판단',
         bullets: [
-          '크기가 같은 이미지는 이미지 해시 거리로 비교',
-          '크기가 다르면 텍스트·사물(자카드 유사도)과 주 색상 차이를 함께 비교',
+          '크기가 같은 이미지는 이미지끼리 직접 비교',
+          '크기가 다르면 추출한 텍스트·사물·주 색상이 얼마나 겹치는지로 비교',
         ],
       },
       {
