@@ -36,10 +36,10 @@ export const experience: Job[] = [
       {
         name: '글로벌 감사 모니터링 시스템',
         period: '2025.08 - 현재',
-        stack: ['Python', 'BigQuery', 'Apps Script', 'SAP', 'Oracle ERP'],
+        stack: ['Python', 'BigQuery', 'Apps Script'],
         background: ['시스템별로 나뉘고 해외 법인은 수기로 하던 감사 모니터링을 국내외 통합 시스템으로 전환'],
         results: [
-          '국내 SAP와 해외 법인 Oracle ERP 데이터를 BigQuery로 통합하고 법인별 지표와 임계치 설정',
+          'BigQuery의 국내 SAP·해외 법인 Oracle ERP 데이터를 활용해 법인별 지표와 임계치 설정',
           'AI 챗봇과 AI 요약 리포트 기능 구현',
           '태국·말레이시아 법인에 현지 출장으로 단계적 도입',
           '모니터링 주기 국내 1주 → 1일, 해외 법인 1개월 → 1주',
