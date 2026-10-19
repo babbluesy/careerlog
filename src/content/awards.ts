@@ -5,7 +5,7 @@ export const awards: Award[] = [
     title: 'CIF 2026 (Coway Innovation Fair) 본선 진출',
     org: '코웨이',
     date: '2026.08',
-    details: ['글로벌 감사 모니터링 시스템을 단독 출품해 약 200개 출품작 중 본선 45팀에 선정'],
+    details: ['글로벌 감사 모니터링 시스템을 단독 출품해 본선 진출'],
   },
   {
     title: 'SSAFY 자율프로젝트 우수상 (대전 2위)',
