@@ -32,16 +32,9 @@ export interface Site {
     career: string
     ai: string
     caseStudyLink: string
-    /** 논문 모달의 제목이자, 인쇄본에서 같은 내용을 여는 소제목 */
-    publications: string
-    /** 논문이 있는 학교 머리말에 붙는 버튼 문구 */
-    openPublications: string
-    abstract: string
-    research: string
     training: string
     collaborators: string
     nav: string
-    close: string
     themeLight: string
     themeDark: string
   }
@@ -103,10 +96,7 @@ export interface School {
   projects?: { name: string; details: string[] }[]
 }
 
-/**
- * 논문은 별도 탭 없이, 그 논문을 쓴 학교(school)의 Education 항목에서 모달로 열린다.
- * school 은 education.ts 의 School.name 과 같은 문자열이어야 한다.
- */
+/** 논문. 화면에는 소개 탭의 논문 수로만 쓰이고, 내용은 학력의 연구 항목에 적는다. */
 export interface Publication {
   school: string
   title: string
@@ -116,13 +106,6 @@ export interface Publication {
   abstract: string
 }
 
-export interface ResearchProject {
-  school: string
-  name: string
-  org: string
-  period: string
-  role: string
-}
 
 export interface Award {
   title: string

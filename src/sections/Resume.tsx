@@ -12,7 +12,7 @@ import { Awards } from './Awards'
  * 화면에서 읽으라고 만든 페이지가 아니라 **인쇄용 원본**이다.
  * 이 경로를 열고 Ctrl+P 로 PDF를 저장하면 페이지의 모든 내용이 한 문서로 나온다. 그래서 여기서는
  *
- *   - 접혀 있는 내용을 두지 않는다 (포트폴리오 아코디언, 논문 모달을 전부 펼친다)
+ *   - 접혀 있는 내용을 두지 않는다 (포트폴리오 아코디언을 전부 펼친다)
  *   - 섹션마다 페이지를 새로 시작한다 (.resume-section, index.css 의 @media print)
  *
  * 섹션의 내용 자체는 탭과 똑같은 컴포넌트를 그대로 쓴다. 문구를 두 벌 관리하지 않기 위해서다.
@@ -40,7 +40,7 @@ export function Resume() {
           <Portfolio expandAll />
         </div>
         <div className="resume-section">
-          <Education expandAll />
+          <Education />
         </div>
         <div className="resume-section">
           <Awards />
