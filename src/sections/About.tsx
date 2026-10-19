@@ -1,4 +1,4 @@
-import { site, skills, strengths, experience, publications } from '../content'
+import { site, skills, strengths, experience } from '../content'
 import { Section, Heading, Row, Bullets, Stack } from '../components/ui'
 
 /**
@@ -16,7 +16,6 @@ const careerMonths = experience.reduce((n, job) => {
 const stats = [
   { value: Math.floor(careerMonths / 12), label: site.stats.years },
   { value: experience.reduce((n, job) => n + job.projects.length, 0), label: site.stats.projects },
-  { value: publications.length, label: site.stats.publications },
 ]
 
 export function About() {

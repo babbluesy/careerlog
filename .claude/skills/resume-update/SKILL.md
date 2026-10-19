@@ -16,7 +16,7 @@ description: 이력서 내용을 사이트(src/content/)에 반영한다. 새 �
 | --- | --- |
 | 경력·프로젝트 | `experience.ts` |
 | 포트폴리오 상세 | `portfolio.ts` |
-| 학력 / 논문·연구과제 / 수상·교육 | `education.ts` / `publication.ts` / `awards.ts` |
+| 학력(논문 포함) / 수상·교육 | `education.ts` / `awards.ts` |
 | 스킬 / 핵심 역량 | `skills.json` / `strengths.json` |
 | 이름·직함·소개·반복 문구 | `site.json` |
 

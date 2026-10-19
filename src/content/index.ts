@@ -9,7 +9,6 @@
  *   experience.ts   경력과 프로젝트
  *   portfolio.ts    포트폴리오 상세 (케이스 스터디)
  *   education.ts    학력
- *   publication.ts  논문 (소개 탭의 논문 수를 센다)
  *   awards.ts       수상·교육 이수
  *   tabs.ts         사이드바 탭 (라우팅과 연결되어 있어 TS로 둔다)
  *
@@ -31,5 +30,4 @@ export { tabs } from './tabs'
 export { experience } from './experience'
 export { caseStudies } from './portfolio'
 export { schools } from './education'
-export { publications } from './publication'
 export { awards, educations } from './awards'

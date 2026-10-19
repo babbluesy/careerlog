@@ -24,7 +24,6 @@ export interface Site {
   stats: {
     years: string
     projects: string
-    publications: string
   }
   /** 화면 곳곳에 반복되는 고정 문구. 컴포넌트에 문자열을 적는 대신 여기서 가져다 쓴다. */
   labels: {
@@ -94,16 +93,6 @@ export interface School {
   period: string
   notes?: string[]
   projects?: { name: string; details: string[] }[]
-}
-
-/** 논문. 화면에는 소개 탭의 논문 수로만 쓰이고, 내용은 학력의 연구 항목에 적는다. */
-export interface Publication {
-  school: string
-  title: string
-  journal: string
-  date: string
-  type: string
-  abstract: string
 }
 
 
