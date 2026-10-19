@@ -1,5 +1,5 @@
 import { experience, site } from '../content'
-import { Section, Bullets, Tag, Period, Label } from '../components/ui'
+import { Section, Row, Bullets, Stack } from '../components/ui'
 
 export function Experience() {
   return (
@@ -7,62 +7,33 @@ export function Experience() {
       <div className="space-y-14">
         {experience.map((job) => (
           <article key={job.company}>
-            <header className="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-3">
+            <header className="flex flex-wrap items-baseline justify-between gap-x-4 border-b-2 border-ink pb-3">
               <div>
                 <h3 className="text-xl font-bold tracking-tight">{job.company}</h3>
-                <p className="mt-1 font-mono text-xs text-accent">
-                  {job.team ? `${job.team} · ${job.role}` : job.role}
-                </p>
+                <p className="text-sm text-muted">{job.team ? `${job.team}, ${job.role}` : job.role}</p>
               </div>
-              <Period>{job.period}</Period>
+              <span className="text-sm text-faint tabular-nums">{job.period}</span>
             </header>
 
-            {job.summary && (
-              <p className="mb-6 border-l-2 border-accent/40 pl-4 text-[0.925rem] leading-relaxed text-muted italic">
-                {job.summary}
-              </p>
-            )}
+            {job.summary && <p className="mt-4 leading-7 text-muted">{job.summary}</p>}
 
-            <ol className="relative space-y-8 border-l border-line pl-6">
-              {job.projects.map((project) => (
-                <li key={project.name} className="relative">
-                  <span className="absolute top-1.5 -left-[26px] h-2.5 w-2.5 rounded-full border-2 border-paper bg-accent" />
-
-                  <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-                    <h4 className="font-semibold">{project.name}</h4>
-                    {project.period && <Period>{project.period}</Period>}
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <Label>{site.labels.background}</Label>
-                      <Bullets items={project.background} />
-                    </div>
-                    <div>
-                      <Label>{site.labels.results}</Label>
-                      <Bullets items={project.results} />
-                    </div>
-
-                    {project.stack && (
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.stack.map((s) => (
-                          <Tag key={s}>{s}</Tag>
-                        ))}
-                      </div>
-                    )}
-
-                    {project.caseStudy && (
-                      <a
-                        href="#/portfolio"
-                        className="no-print inline-flex items-center gap-1 font-mono text-xs text-accent hover:underline"
-                      >
-                        {site.labels.caseStudyLink} <span aria-hidden>→</span>
-                      </a>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ol>
+            {job.projects.map((project) => (
+              <Row key={project.name} date={project.period}>
+                <h4 className="font-bold">{project.name}</h4>
+                {/* 배경 및 목적은 한 문장이라 본문색으로, 한 일과 결과는 그 아래 목록으로 */}
+                <p className="mt-1 leading-7">{project.background.join(' ')}</p>
+                <Bullets items={project.results} />
+                <Stack items={project.stack} />
+                {project.caseStudy && (
+                  <a
+                    href="#/portfolio"
+                    className="no-print mt-3 inline-block text-sm text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+                  >
+                    {site.labels.caseStudyLink}
+                  </a>
+                )}
+              </Row>
+            ))}
           </article>
         ))}
       </div>

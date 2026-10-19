@@ -2,98 +2,79 @@ import type { CSSProperties, ReactNode } from 'react'
 import { brands, tabs } from '../content'
 import type { TabId } from '../content/types'
 
-/**
- * 탭마다 반복되는 머리말. 번호·제목·부제는 tabs.ts 하나에서만 오므로
- * 탭 순서를 바꾸면 번호도 따라 바뀐다.
- */
+/** 탭 머리말. 제목은 tabs.ts 하나에서만 온다. */
 export function Section({ id, children }: { id: TabId; children: ReactNode }) {
-  const index = tabs.findIndex((tab) => tab.id === id)
-  const tab = tabs[index]
+  const tab = tabs.find((t) => t.id === id)!
 
   return (
     <section>
-      <header className="mb-10">
-        <div className="flex items-baseline gap-3 font-mono text-xs tracking-widest text-accent uppercase">
-          <span>{String(index + 1).padStart(2, '0')}</span>
-          <span className="h-px flex-1 bg-line" />
-          <span className="text-faint">{tab.ko}</span>
-        </div>
-        <h2 className="mt-4 text-3xl font-bold tracking-tight">{tab.label}</h2>
-      </header>
+      <h2 className="mb-8 text-[1.75rem] leading-tight font-bold tracking-tight">{tab.label}</h2>
       {children}
     </section>
   )
 }
 
-/** 본문 안의 소제목. '연구과제 참여' 같은 하위 묶음을 연다. */
+/** 탭 안의 하위 묶음('걸어온 길', '스킬' …) 제목. */
 export function Heading({ children }: { children: ReactNode }) {
-  return (
-    <h3 className="mb-5 flex items-center gap-3 font-mono text-xs tracking-widest text-faint uppercase">
-      {children}
-      <span className="h-px flex-1 bg-line" />
-    </h3>
-  )
+  return <h3 className="mt-16 mb-2 border-b-2 border-ink pb-2 text-lg font-bold">{children}</h3>
 }
 
-/** 본문 카드. 왼쪽 모서리에만 강조선을 둬서 카드가 나열돼도 눈이 피로하지 않게. */
-export function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
+/**
+ * 이 사이트의 기본 단위. 장부처럼 왼쪽에 기간, 오른쪽에 내용을 둔다.
+ * 모든 탭이 같은 행을 쓰므로 날짜 열이 페이지 전체에서 한 줄로 맞는다.
+ * 좁은 화면에서는 기간이 내용 위로 올라간다.
+ */
+export function Row({ date, children }: { date?: ReactNode; children: ReactNode }) {
   return (
-    <div className={`rounded-r-lg border border-line border-l-2 border-l-accent bg-card ${className}`}>
-      {children}
+    <div className="grid gap-1 border-b border-line py-6 last:border-b-0 sm:grid-cols-[8.5rem_1fr] sm:gap-6">
+      <div className="pt-0.5 text-sm text-faint tabular-nums">{date}</div>
+      <div className="min-w-0">{children}</div>
     </div>
   )
 }
 
 export function Bullets({ items }: { items: string[] }) {
   return (
-    <ul className="space-y-2">
+    <ul className="mt-2 list-disc space-y-1 pl-5 marker:text-accent">
       {items.map((item) => (
-        <li key={item} className="flex gap-2.5 text-[0.925rem] leading-relaxed text-muted">
-          <span className="mt-[0.6em] h-1 w-1 shrink-0 rounded-full bg-accent/60" />
-          <span>{item}</span>
+        <li key={item} className="pl-0.5 leading-7 text-muted">
+          {item}
         </li>
       ))}
     </ul>
   )
 }
 
+/** 쓴 기술 목록. 글자만 작게 두고, brands.ts 에 로고가 있으면 앞에 붙인다. */
+export function Stack({ items }: { items?: string[] }) {
+  if (!items?.length) return null
+  return (
+    <p className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
+      {items.map((item) => (
+        <Tag key={item}>{item}</Tag>
+      ))}
+    </p>
+  )
+}
+
 /**
- * 태그. 이름에 해당하는 브랜드 로고가 brands.ts 에 있으면 앞에 붙는다 — 스킬이든 프로젝트 스택이든
- * 같은 이름이면 같은 로고가 나온다. 로고가 없는 이름(K-Means, 감성분석…)은 글자만 나온다.
+ * 기술 이름 하나. 이름에 해당하는 브랜드 로고가 brands.ts 에 있으면 앞에 붙는다.
+ * 로고는 평소 회색이고 마우스를 올린 것만 브랜드 색으로 켜진다 (index.css 의 .tag-logo).
  */
 export function Tag({ children }: { children: ReactNode }) {
   const brand = typeof children === 'string' ? brands[children] : undefined
 
   return (
     <span
-      className="tag inline-flex items-center gap-1 rounded border border-line px-1.5 py-0.5 font-mono text-[0.7rem] text-muted"
+      className="tag inline-flex items-center gap-1 text-[0.8rem] text-faint"
       style={brand ? ({ '--brand': `#${brand.hex}` } as CSSProperties) : undefined}
     >
       {brand && (
-        <svg
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
-          className="tag-logo h-3 w-3 shrink-0"
-        >
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="tag-logo h-3 w-3 shrink-0">
           <path d={brand.path} />
         </svg>
       )}
       {children}
     </span>
-  )
-}
-
-/** 기간·날짜. 자릿수가 흔들리지 않게 등폭 숫자로 고정한다. */
-export function Period({ children }: { children: ReactNode }) {
-  return (
-    <span className="shrink-0 font-mono text-xs text-faint tabular-nums">{children}</span>
-  )
-}
-
-/** 소제목 위에 붙는 작은 라벨. '배경 및 목적' 같은 구조를 드러낸다. */
-export function Label({ children }: { children: ReactNode }) {
-  return (
-    <p className="mb-2 font-mono text-[0.7rem] tracking-wider text-faint uppercase">{children}</p>
   )
 }

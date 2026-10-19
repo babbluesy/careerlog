@@ -19,25 +19,11 @@
 import siteJson from './site.json'
 import skillsJson from './skills.json'
 import strengthsJson from './strengths.json'
-import { skillIconNames } from './types'
-import type { Site, SkillGroup, SkillIconName, Strength } from './types'
+import type { Site, SkillGroup, Strength } from './types'
 
 export const site: Site = siteJson
 
-/**
- * icon 만 예외적으로 손이 간다. JSON의 문자열은 타입이 그냥 string 이라
- * 아이콘 이름 오타는 타입 체커가 잡아주지 못한다. 대신 여기서 이름을 대조해,
- * 없는 아이콘을 적으면 개발 서버가 뜨는 순간 바로 알 수 있게 한다.
- */
-export const skills: SkillGroup[] = skillsJson.map((group) => {
-  if (!skillIconNames.includes(group.icon as SkillIconName)) {
-    throw new Error(
-      `skills.json: '${group.category}' 의 아이콘 '${group.icon}' 은 없는 이름이다. ` +
-        `쓸 수 있는 이름: ${skillIconNames.join(', ')}`,
-    )
-  }
-  return { ...group, icon: group.icon as SkillIconName }
-})
+export const skills: SkillGroup[] = skillsJson
 export const strengths: Strength[] = strengthsJson
 
 export { brands } from './brands'

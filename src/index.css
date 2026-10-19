@@ -3,13 +3,7 @@
 /* Tailwind v4는 기본이 media-query 다크모드다. 토글 버튼으로 제어하려면 클래스 기준으로 바꾼다. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/*
- * 본문: 나눔스퀘어 네오 (네이버, SIL OFL). 제목: 400·700 두 벌만 싣는다.
- * 600(semibold)은 CSS 폰트 매칭 규칙에 따라 700으로 올라간다.
- * 코드/라벨: D2Coding (네이버, SIL OFL). 전체 한글 세트는 1.5MB라 라틴·숫자·기호만 서브셋했고,
- * 모노로 표기된 한글 라벨은 아래 스택에서 나눔스퀘어 네오로 폴백된다.
- * 네이버 공식 배포본은 woff/ttf뿐이라 woff2로 변환해 자체 호스팅한다 (외부 CDN 금지).
- */
+/* 본문·제목 모두 나눔스퀘어 네오 (네이버, SIL OFL). 400·700 두 벌만 자체 호스팅한다 (외부 CDN 금지). */
 @font-face {
   font-family: 'NanumSquareNeo';
   src: url('./assets/fonts/NanumSquareNeo-Regular.woff2') format('woff2');
@@ -26,48 +20,30 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'D2Coding';
-  src: url('./assets/fonts/D2Coding-Latin.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'D2Coding';
-  src: url('./assets/fonts/D2CodingBold-Latin.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 /*
  * 팔레트는 CSS 변수로 두고 .dark에서 값만 갈아끼운다.
- * 이렇게 하면 컴포넌트에서 dark: 변형을 반복하지 않아도 되고, 색을 한 곳에서 바꿀 수 있다.
+ * 감사 장부의 잉크처럼 초록빛이 도는 무채색 위에, 강조색은 짙은 청록 하나만 쓴다.
  */
 :root {
-  --paper: #faf9f7;
+  --paper: #f6f7f5;
   --card: #ffffff;
-  --ink: #1c1917;
-  --muted: #78716c;
-  --faint: #a8a29e;
-  --line: #e7e5e4;
-  --accent: #b45309;
-  --accent-soft: #fef3c7;
-  --grid: #e7e5e4;
+  --ink: #17201c;
+  --muted: #4b5752;
+  --faint: #78847e;
+  --line: #dde2de;
+  --accent: #0e6b55;
+  --accent-soft: #e1efe9;
 }
 
 .dark {
-  --paper: #0c0a09;
-  --card: #17140f;
-  --ink: #e7e5e4;
-  --muted: #a8a29e;
-  --faint: #78716c;
-  --line: #292524;
-  --accent: #f59e0b;
-  --accent-soft: #422006;
-  --grid: #1c1917;
+  --paper: #0f1513;
+  --card: #151d1a;
+  --ink: #e4eae7;
+  --muted: #aab5b0;
+  --faint: #7f8b86;
+  --line: #26302c;
+  --accent: #5cc4a5;
+  --accent-soft: #16302a;
 }
 
 @theme inline {
@@ -82,7 +58,6 @@
 
   --font-sans: 'NanumSquareNeo', 'Nanum Gothic', -apple-system, BlinkMacSystemFont, system-ui,
     'Segoe UI', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
-  --font-mono: 'D2Coding', 'NanumSquareNeo', ui-monospace, 'Cascadia Mono', 'Consolas', monospace;
 }
 
 html {
@@ -90,7 +65,7 @@ html {
 }
 
 body {
-  @apply bg-paper text-ink antialiased;
+  @apply bg-paper text-[1.0625rem] text-ink antialiased;
   word-break: keep-all; /* 한글이 단어 중간에서 끊기지 않게 */
 }
 
@@ -116,12 +91,6 @@ body {
     box-shadow 1000ms ease !important;
 }
 
-/* 산점도를 연상시키는 도트 그리드. 사이드바와 히어로의 바탕에 아주 옅게 깐다. */
-.dot-grid {
-  background-image: radial-gradient(circle at 1px 1px, var(--grid) 1px, transparent 0);
-  background-size: 16px 16px;
-}
-
 /*
  * 태그 안의 브랜드 로고. 평소에는 글자와 같은 회색으로 두어 페이지가 알록달록해지지 않게 하고,
  * 마우스를 올린 태그 하나만 브랜드 색으로 켠다. 색은 Tag가 --brand 로 넘긴다.
@@ -140,7 +109,7 @@ body {
   color: color-mix(in oklab, var(--brand) 60%, white);
 }
 
-/* 탭 전환 시 내용이 툭 바뀌지 않고 살짝 떠오르게. */
+/* 모달이 열릴 때 살짝 떠오르게. */
 @keyframes fade {
   from {
     opacity: 0;
@@ -199,9 +168,6 @@ body {
     --muted: #444444;
     --line: #cccccc;
     --accent: #000000;
-  }
-  .dot-grid {
-    background-image: none;
   }
   a[href^='http']::after {
     content: ' (' attr(href) ')';

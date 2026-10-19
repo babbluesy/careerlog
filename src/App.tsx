@@ -29,13 +29,12 @@ export default function App() {
   const View = views[route]
 
   return (
-    <div className="min-h-screen md:pl-72">
+    <div className="min-h-screen md:pl-64">
       <Sidebar current={route} onSelect={goTo} dark={dark} onToggleTheme={toggle} />
 
-      {/* key를 주면 탭이 바뀔 때마다 다시 마운트되어 페이드가 걸린다. */}
-      <main key={route} className="print-flow mx-auto max-w-3xl animate-[fade_.35s_ease-out] px-6 py-12 md:px-12 md:py-16">
+      <main key={route} className="print-flow mx-auto max-w-[46rem] px-5 py-10 md:px-12 md:py-16">
         <View />
-        <footer className="no-print mt-20 border-t border-line pt-6 font-mono text-[0.65rem] text-faint">
+        <footer className="no-print mt-20 border-t border-line pt-6 text-xs text-faint">
           © {new Date().getFullYear()} {site.name} · {site.footer}
         </footer>
       </main>

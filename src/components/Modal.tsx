@@ -50,10 +50,10 @@ export function Modal({
         aria-labelledby={titleId}
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
-        className="my-auto w-full max-w-2xl animate-[fade_.2s_ease-out] rounded-lg border border-line bg-paper shadow-xl outline-none"
+        className="my-auto w-full max-w-2xl animate-[fade_.2s_ease-out] rounded-lg border border-line bg-paper shadow-lg outline-none"
       >
         <header className="flex items-center justify-between gap-4 border-b border-line px-6 py-4">
-          <h2 id={titleId} className="font-mono text-xs tracking-widest text-faint uppercase">
+          <h2 id={titleId} className="font-bold">
             {title}
           </h2>
           <button

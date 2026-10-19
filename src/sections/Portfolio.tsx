@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { caseStudies } from '../content'
-import { Section, Bullets, Tag, Period } from '../components/ui'
+import { caseStudies, site } from '../content'
+import { Section, Row, Bullets, Stack } from '../components/ui'
 
 /** expandAll: 이력서 문서(#/resume)처럼 접힌 내용이 있으면 안 되는 곳에서 전부 펼친다. */
 export function Portfolio({ expandAll = false }: { expandAll?: boolean }) {
@@ -14,76 +14,55 @@ export function Portfolio({ expandAll = false }: { expandAll?: boolean }) {
 
   return (
     <Section id="portfolio">
-      <div className="space-y-3">
-        {caseStudies.map((study, i) => {
+      <div className="border-t-2 border-ink">
+        {caseStudies.map((study) => {
           const expanded = open.includes(study.id)
           return (
-            <article
-              key={study.id}
-              className={`overflow-hidden rounded-lg border transition-colors ${
-                expanded ? 'border-accent/40 bg-card' : 'border-line bg-card hover:border-accent/30'
-              }`}
-            >
+            <Row key={study.id} date={study.period}>
               <button
                 type="button"
                 onClick={() => toggle(study.id)}
                 aria-expanded={expanded}
-                className="flex w-full cursor-pointer items-start gap-4 p-5 text-left"
+                className="group flex w-full cursor-pointer items-start gap-3 text-left focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
               >
-                <span className="mt-0.5 font-mono text-sm tabular-nums text-accent">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-
                 <span className="flex-1">
-                  <span className="flex flex-wrap items-baseline justify-between gap-2">
-                    <span className="text-lg font-bold tracking-tight">{study.title}</span>
-                    <Period>{study.period}</Period>
-                  </span>
-                  <span className="mt-0.5 block font-mono text-xs text-accent">{study.company}</span>
-                  <span className="mt-2.5 block text-[0.925rem] leading-relaxed text-muted">
-                    {study.summary}
-                  </span>
+                  <span className="block text-lg font-bold group-hover:text-accent">{study.title}</span>
+                  <span className="block text-sm text-muted">{study.company}</span>
+                  <span className="mt-2 block leading-7">{study.summary}</span>
                 </span>
-
-                <span
-                  className="no-print mt-1 shrink-0 font-mono text-xs text-faint transition-transform duration-200"
-                  style={{ transform: expanded ? 'rotate(90deg)' : undefined }}
-                  aria-hidden
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className={`no-print mt-1.5 h-4 w-4 shrink-0 text-faint transition-transform duration-200 ${
+                    expanded ? 'rotate-180' : ''
+                  }`}
                 >
-                  ▶
-                </span>
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
               </button>
 
               {expanded && (
-                <div className="px-5 pb-6 md:pl-14">
+                <div className="mt-5 space-y-5">
+                  {study.blocks.map((block) => (
+                    <div key={block.heading}>
+                      <h5 className="text-[0.95rem] font-bold">{block.heading}</h5>
+                      <Bullets items={block.bullets} />
+                    </div>
+                  ))}
                   {study.collaborators && (
-                    <p className="mb-6 font-mono text-[0.7rem] tracking-wider text-faint uppercase">
-                      with {study.collaborators.join(' · ')}
+                    <p className="text-sm text-muted">
+                      {site.labels.collaborators}: {study.collaborators.join(', ')}
                     </p>
                   )}
-
-                  <div className="space-y-7">
-                    {study.blocks.map((block, bi) => (
-                      <div key={block.heading}>
-                        <h4 className="mb-3 flex items-center gap-3 text-sm font-semibold">
-                          <span className="font-mono text-xs text-accent tabular-nums">
-                            {`${String(i + 1).padStart(2, '0')}.${bi + 1}`}
-                          </span>
-                          {block.heading}
-                        </h4>
-                        <Bullets items={block.bullets} />
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-7 flex flex-wrap gap-1.5 border-t border-line pt-5">
-                    {study.stack.map((s) => (
-                      <Tag key={s}>{s}</Tag>
-                    ))}
-                  </div>
+                  <Stack items={study.stack} />
                 </div>
               )}
-            </article>
+            </Row>
           )
         })}
       </div>

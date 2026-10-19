@@ -1,4 +1,5 @@
 import { site } from '../content'
+import { photoSrc } from '../components/Sidebar'
 import { About } from './About'
 import { Experience } from './Experience'
 import { Portfolio } from './Portfolio'
@@ -19,18 +20,13 @@ import { Awards } from './Awards'
 export function Resume() {
   return (
     <div className="print-flow mx-auto max-w-3xl px-6 py-12 md:px-12">
-      <header className="mb-14 flex flex-wrap items-end justify-between gap-4 border-b-2 border-ink pb-6">
+      <header className="mb-14 flex items-center gap-6 border-b-2 border-ink pb-6">
+        <img src={photoSrc} alt={site.name} className="h-28 w-21 rounded object-cover object-top" />
         <div>
           <h1 className="text-4xl font-bold tracking-tight">{site.name}</h1>
-          <p className="mt-2 font-mono text-xs tracking-[0.2em] text-accent uppercase">
-            {site.title}
-          </p>
+          <p className="mt-1 text-muted">{site.title}</p>
+          <p className="mt-1 text-sm text-faint">{site.caption}</p>
         </div>
-        <p className="text-right font-mono text-[0.7rem] leading-relaxed text-faint">
-          {site.caption}
-          <br />
-          {site.location}
-        </p>
       </header>
 
       <div className="space-y-20">

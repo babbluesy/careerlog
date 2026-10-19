@@ -36,57 +36,6 @@ export function useHashTab() {
   return { route, goTo }
 }
 
-/** 자릿수마다 최소 이만큼 바퀴를 돌린다. 값이 1이어도 0→1로 끝나지 않고 숫자가 굴러간다. */
-const MIN_SPINS = 3
-
-/**
- * 오도미터처럼 자릿수를 굴려서 target 에 멎게 한다.
- * 0에서 target 까지 선형으로 세면 한 자리 수(1, 9…)는 볼 것도 없이 끝나므로, 자리마다 여러 바퀴를 돌린다.
- * 아래 자리일수록 많이 돌아 마지막까지 바쁘게 움직이고, 끝으로 갈수록 느려져(ease-out) 멎는 느낌이 난다.
- * 모션을 줄여 달라는 설정이면 애니메이션 없이 최종값을 바로 준다.
- */
-export function useCountUp(target: number, durationMs = 1400) {
-  const reduced =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-  const digits = String(target)
-  const [value, setValue] = useState(() => (reduced ? digits : '0'.repeat(digits.length)))
-
-  useEffect(() => {
-    if (reduced) {
-      setValue(digits)
-      return
-    }
-
-    let frame = 0
-    let start: number | null = null
-
-    const tick = (now: number) => {
-      start ??= now
-      const progress = Math.min((now - start) / durationMs, 1)
-      const eased = 1 - Math.pow(1 - progress, 3)
-
-      // 각 자리는 (바퀴 수 × 10 + 목표 숫자) 만큼 굴러간다. eased 가 1이면 정확히 목표 숫자에 멎는다.
-      setValue(
-        digits
-          .split('')
-          .map((digit, i) => {
-            const spins = MIN_SPINS + (digits.length - 1 - i)
-            return Math.floor(eased * (spins * 10 + Number(digit))) % 10
-          })
-          .join(''),
-      )
-
-      if (progress < 1) frame = requestAnimationFrame(tick)
-    }
-
-    frame = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frame)
-  }, [digits, durationMs, reduced])
-
-  return value
-}
-
 /** 색이 바뀌는 동안만 전역 transition을 켠다. 상시로 켜두면 호버 등 다른 상호작용까지 느려진다. */
 const THEME_FADE_MS = 1000
 

@@ -3,7 +3,6 @@ export type TabId = 'about' | 'experience' | 'portfolio' | 'education' | 'awards
 export interface Tab {
   id: TabId
   label: string
-  ko: string
 }
 
 /** site.json — 이름·직함처럼 페이지 전체에서 쓰이는 값과, 화면에 찍히는 라벨. */
@@ -13,6 +12,8 @@ export interface Site {
   /** 사이드바 하단의 한 줄 소개 */
   caption: string
   location: string
+  /** public/ 안의 프로필 사진 파일명 */
+  photo: string
   footer: string
   /** About 첫머리에 한 호흡으로 읽히는 문단 */
   tagline: string
@@ -30,8 +31,6 @@ export interface Site {
     skills: string
     career: string
     ai: string
-    background: string
-    results: string
     caseStudyLink: string
     /** 논문 모달의 제목이자, 인쇄본에서 같은 내용을 여는 소제목 */
     publications: string
@@ -40,6 +39,7 @@ export interface Site {
     abstract: string
     research: string
     training: string
+    collaborators: string
     nav: string
     close: string
     themeLight: string
@@ -47,30 +47,14 @@ export interface Site {
   }
 }
 
-/** 카테고리 앞에 붙는 아이콘. 모양은 components/icons.tsx 에 있고, 여기서 고를 수 있는 이름만 정한다. */
-export const skillIconNames = [
-  'code',
-  'chart',
-  'sparkles',
-  'database',
-  'bars',
-  'server',
-  'wrench',
-] as const
-
-export type SkillIconName = (typeof skillIconNames)[number]
-
 /** skills.json */
 export interface SkillGroup {
   category: string
-  icon: SkillIconName
   items: string[]
 }
 
-/** strengths.json — 커리어 곡선의 각 단계. 배열 순서가 곡선 위의 순서다. */
+/** strengths.json — About 의 '걸어온 길'. 배열 순서가 화면 순서다. */
 export interface Strength {
-  /** 곡선 위에 찍히는 이름 (통계, 개발, …) */
-  label: string
   period: string
   /** 그 시기의 소속 */
   note: string
@@ -78,7 +62,7 @@ export interface Strength {
   details: string[]
 }
 
-/** 경력 내 개별 프로젝트. 이력서의 [배경 및 목적] / [진행한 내용 및 결과] 구조를 그대로 따른다. */
+/** 경력 내 개별 프로젝트. background 는 한 문장 요약(배경 및 목적), results 는 한 일과 결과. */
 export interface Project {
   name: string
   /** 진행 기간. 확인되지 않은 경우 생략하면 화면에도 표시되지 않는다. */
