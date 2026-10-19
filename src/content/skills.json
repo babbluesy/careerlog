@@ -4,10 +4,6 @@
     "items": ["SQL", "Python", "Apps Script"]
   },
   {
-    "category": "분석",
-    "items": ["회귀분석", "군집분석", "기여도 분석", "시계열 예측", "감성분석", "Random Forest"]
-  },
-  {
     "category": "데이터",
     "items": ["BigQuery", "Cloud Storage", "AWS S3", "AWS Athena"]
   },
