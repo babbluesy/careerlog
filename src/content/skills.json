@@ -1,0 +1,79 @@
+[
+  {
+    "category": "Language",
+    "icon": "code",
+    "items": [
+      "Python",
+      "R",
+      "SQL",
+      "Apps Script"
+    ]
+  },
+  {
+    "category": "Analysis",
+    "icon": "chart",
+    "items": [
+      "통계 모델링",
+      "회귀분석",
+      "Random Forest",
+      "시계열 예측",
+      "감성분석",
+      "군집분석",
+      "기여도 분석",
+      "이미지 유사도 분석",
+      "이상 패턴 탐지"
+    ]
+  },
+  {
+    "category": "AI",
+    "icon": "sparkles",
+    "items": [
+      "Claude Code",
+      "Prompt Engineering"
+    ]
+  },
+  {
+    "category": "Cloud & Data",
+    "icon": "database",
+    "items": [
+      "AWS S3",
+      "AWS Athena",
+      "GCP BigQuery",
+      "GCP Cloud Storage",
+      "GCP Compute Engine",
+      "GCP Secret Manager",
+      "SAP",
+      "Oracle"
+    ]
+  },
+  {
+    "category": "Visualization",
+    "icon": "bars",
+    "items": [
+      "Tableau",
+      "Streamlit",
+      "Looker Studio"
+    ]
+  },
+  {
+    "category": "Backend",
+    "icon": "server",
+    "items": [
+      "FastAPI"
+    ]
+  },
+  {
+    "category": "Tools",
+    "icon": "wrench",
+    "items": [
+      "Git",
+      "GitHub",
+      "GitHub Actions",
+      "Docker",
+      "clasp",
+      "Jupyter",
+      "Appsflyer",
+      "Adjust"
+    ]
+  }
+]

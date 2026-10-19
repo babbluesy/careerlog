@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>박현우 | Data Specialist</title>
+    <meta name="description" content="박현우 — 통계학 기반의 데이터 전문가. 이력서와 포트폴리오" />
+    <script>
+      // 다크모드 깜빡임(FOUC) 방지: React 렌더 전에 클래스를 확정한다.
+      (() => {
+        const saved = localStorage.getItem('theme')
+        const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+        document.documentElement.classList.toggle('dark', dark)
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
